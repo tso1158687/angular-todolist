@@ -2,31 +2,15 @@
 <section class="todoapp">
   <header class="header">
     <h1>{{ title }}</h1>
-    <input
-      [(ngModel)]="newTodo"
-      (keyup.enter)="addNewTodo()"
-      class="new-todo"
-      [placeholder]="placeholder"
-      autofocus
-    />
+    <input [(ngModel)]="newTodo" (keyup.enter)="addNewTodo()" class="new-todo" [placeholder]="placeholder" autofocus />
   </header>
   <section class="main">
-    <input
-      id="toggle-all"
-      class="toggle-all"
-      type="checkbox"
-      (click)="showTodos = !showTodos"
-    />
+    <input id="toggle-all" class="toggle-all" type="checkbox" (click)="showTodos = !showTodos" />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todo of todos; index as i">
       <li [ngClass]="{ completed: todo.status, view: !todo.status }" *ngIf="changeDataStatus(todo.status)">
         <div class="view">
-          <input
-            class="toggle"
-            type="checkbox"
-            [checked]="todo.status"
-            (change)="todo.status = !todo.status"
-          />
+          <input class="toggle" type="checkbox" [checked]="todo.status" (change)="todo.status = !todo.status" />
           <label>{{ todo.name }}</label>
           <button class="destroy" (click)="deleteTodo(i)"></button>
         </div>
@@ -34,13 +18,6 @@
       </li>
     </ul>
   </section>
-  <footer class="footer">
-    <span class="todo-count">剩下 <strong>{{leftItems}}</strong> 件事</span>
-    <ul class="filters">
-      <li><a [ngClass]="{'selected': selectType===1}" (click)="changeSelectType(1)">所有</a></li>
-      <li><a [ngClass]="{'selected': selectType===2}" (click)="changeSelectType(2)">進行中</a></li>
-      <li><a [ngClass]="{'selected': selectType===3}" (click)="changeSelectType(3)">完成</a></li>
-    </ul>
-    <button class="clear-completed" (click)="clearCompleted()">清除已完成</button>
-  </footer>
+  <app-footer [leftItems]="leftItems" [selectType]="selectType" (changeStatusFromFooterComponent)="changeSelectType($event)">
+  </app-footer>
 </section>

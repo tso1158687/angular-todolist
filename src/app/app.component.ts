@@ -22,7 +22,10 @@ export class AppComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.dataService.getData().subscribe(data => this.todos = data );
+    this.dataService.getData().subscribe(data => {
+      this.todos = data;
+      this.leftItems = this.todos.filter(todos => !todos.status).length;
+    } );
   }
   addNewTodo() {
     console.log('新增待辦事項內容:');
@@ -45,6 +48,8 @@ export class AppComponent implements OnInit {
     this.todos = this.todos.filter(data => !data.status);
   }
   changeSelectType(type) {
+    console.log('現在的狀態');
+    console.log(type);
     this.selectType = type;
   }
   changeDataStatus(status) {

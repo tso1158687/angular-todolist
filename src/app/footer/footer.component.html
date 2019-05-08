@@ -1,0 +1,9 @@
+<footer class="footer">
+  <span class="todo-count">剩下 <strong>{{leftItems}}</strong> 件事</span>
+  <ul class="filters">
+    <li><a [ngClass]="{'selected': selectType===1}" (click)="changeSelectType(1)">所有</a></li>
+    <li><a [ngClass]="{'selected': selectType===2}" (click)="changeSelectType(2)">進行中</a></li>
+    <li><a [ngClass]="{'selected': selectType===3}" (click)="changeSelectType(3)">完成</a></li>
+  </ul>
+  <button class="clear-completed" (click)="clearCompleted()">清除已完成</button>
+</footer>
