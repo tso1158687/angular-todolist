@@ -9,4 +9,3 @@
 ## 關於本專案
 
 本專案利用以最常見的待辦清單的形式，來示範 angular 許多重要的功能，例如: `two-way binding`, `pipe`, `component`, `service`, `rxjs` 等等核心元件
-

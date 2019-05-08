@@ -10,9 +10,6 @@
       autofocus
     />
   </header>
-  <!--
-    This section should be hidden by default and shown when there are todos
-  -->
   <section class="main">
     <input
       id="toggle-all"
@@ -22,11 +19,7 @@
     />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list" *ngFor="let todo of todos; index as i">
-      <!-- These are here just to show the structure of the list items -->
-      <!--
-        List items should get the class `editing` when editing and `completed` when marked as completed
-      -->
-      <li [ngClass]="{ completed: todo.status, view: !todo.status }">
+      <li [ngClass]="{ completed: todo.status, view: !todo.status }" *ngIf="changeDataStatus(todo.status)">
         <div class="view">
           <input
             class="toggle"
@@ -41,17 +34,13 @@
       </li>
     </ul>
   </section>
-  <!-- This footer should hidden by default and shown when there are todos -->
   <footer class="footer">
-    <!-- This should be `0 items left` by default -->
-    <span class="todo-count"> <strong>0</strong> item left</span>
-    <!-- Remove this if you don't implement routing -->
+    <span class="todo-count">剩下 <strong>{{leftItems}}</strong> 件事</span>
     <ul class="filters">
-      <li><a class="selected" href="#/">All</a></li>
-      <li><a href="#/active">Active</a></li>
-      <li><a href="#/completed">Completed</a></li>
+      <li><a [ngClass]="{'selected': selectType===1}" (click)="changeSelectType(1)">所有</a></li>
+      <li><a [ngClass]="{'selected': selectType===2}" (click)="changeSelectType(2)">進行中</a></li>
+      <li><a [ngClass]="{'selected': selectType===3}" (click)="changeSelectType(3)">完成</a></li>
     </ul>
-    <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" (click)="clearCompleted()">清除已完成</button>
   </footer>
 </section>
