@@ -14,8 +14,10 @@ export class AppComponent implements OnInit {
   todos: any[];
   selectType = 1;
   leftItems = 0;
+
+  // 將所需要的服務注入
   constructor(private dataService: DataService) {}
-  // 元件一啟動就會
+  // 元件一啟動就會執行的function
   ngOnInit() {
     this.getData();
   }
